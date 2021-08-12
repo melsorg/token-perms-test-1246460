@@ -1,16 +1,4 @@
-on:
-  push:
-    branches:
-      - main
-
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/release.yml'
-
-  release:
-    types: [published]
+on: workflow_dispatch
 
 name: release
 
