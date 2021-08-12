@@ -3,7 +3,7 @@ on: workflow_dispatch
 name: release
 
 jobs:
-  qns:
+  test-image:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,7 +16,7 @@ jobs:
       - name: Compute tags
         id: tags
         run: |
-          DOCKER_IMAGE=awslabs/s2n-quic/s2n-quic-qns
+          DOCKER_IMAGE=melscoop-test/token-perms-test-1246460/test-image
           VERSION=main
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
