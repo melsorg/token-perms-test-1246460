@@ -1,5 +1,5 @@
 on: workflow_dispatch
-
+name: basic-release
 env:
   IMAGE: ghcr.io/${{ github.repository }}:latest
 
