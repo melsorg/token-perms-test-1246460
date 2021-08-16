@@ -41,14 +41,13 @@ jobs:
           echo 'ENTRYPOINT ["echo", "Hello from ${{ github.repository }}!"]' >> Dockerfile
 
       - name: Build image
-        run: docker build . -t ${IMAGE,,} # lowercase IMAGE
+        run: docker build . -t ${DOCKER_IMAGE,,} # lowercase IMAGE
         
       - name: Login to ghcr.io
         run: docker login https://ghcr.io -u token --password-stdin <<< ${{ github.token }}
         
       - name: Publish image
-        run: docker push ${IMAGE,,} # lowercase IMAGE
-
+        run: docker push ${DOCKER_IMAGE,,} # lowercase IMAGE
 
 #      - name: Build and push image
 #        uses: docker/build-push-action@v2
