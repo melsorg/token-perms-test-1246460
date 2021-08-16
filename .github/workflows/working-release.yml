@@ -1,6 +1,6 @@
 on:
-  push:
-  workflow_dispatch:
+  workflow_dispatch
+name: working release 
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}:latest
