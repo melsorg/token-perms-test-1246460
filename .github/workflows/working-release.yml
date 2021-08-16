@@ -1,0 +1,35 @@
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}:latest
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create a Dockerfile
+        run: |
+          echo 'FROM alpine' > Dockerfile
+          echo 'ENTRYPOINT ["echo", "Hello from ${{ github.repository }}!"]' >> Dockerfile
+
+      - name: Build image
+        run: |
+          echo ${IMAGE,,}  
+          docker build . -t ${IMAGE,,} # lowercase IMAGE
+
+      - name: Login to ghcr.io
+        run: docker login https://ghcr.io -u token --password-stdin <<< ${{ github.token }}
+
+      - name: Publish image
+        run: docker push ${IMAGE,,} # lowercase IMAGE
+
+      - name: Trigger ghcr-install workflow
+        if: ${{ env.GITHUB_TOKEN != null }}
+        run: gh api repos/${{ github.repository_owner }}/ghcr-install/dispatches <<< '{"event_type":"run"}' --input -
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
