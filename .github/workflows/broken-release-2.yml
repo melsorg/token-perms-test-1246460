@@ -21,10 +21,10 @@ jobs:
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
           fi
-          TAGS="${IMAGE,,}"
+          TAGS="${IMAGE,,}:latest"
           # mark the latest on release
           if [[ $VERSION =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
-            TAGS="$TAGS\n${IMAGE,,}"
+            TAGS="$TAGS\n${IMAGE,,}:latest"
           fi
           echo "::set-output name=tags::${TAGS}"
 
