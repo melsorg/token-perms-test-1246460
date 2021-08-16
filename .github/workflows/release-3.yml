@@ -1,6 +1,6 @@
 on: workflow_dispatch
 
-name: release
+name: release 3
 
 jobs:
   test-image:
