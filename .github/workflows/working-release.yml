@@ -11,12 +11,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Create a Dockerfile
-        run: |
-          echo 'FROM alpine' > Dockerfile
-          echo 'ENTRYPOINT ["echo", "Hello from ${{ github.repository }}!"]' >> Dockerfile
-
       - name: Build image
         run: |
           echo ${IMAGE,,}  
